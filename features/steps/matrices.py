@@ -36,19 +36,19 @@ def step_impl(context,attr1,attr2,x,y):
 	c = Matrix.build_matrix(context.text)
 	assert a * b == c
 
-@then('{attr1} * {attr2} = tuple({x:g},{y:g},{z:g},{w:g})')
+@then('{attr1:w} * {attr2:w} = tuple({x:g},{y:g},{z:g},{w:g})')
 def step_impl(context,attr1,attr2,x,y,z,w):
 	a = getattr(context,attr1)
 	b = getattr(context,attr2)
 	assert a * b == Tuple(x,y,z,w)
 
-@then('{attr1} * identity_matrix = {attr2}')
+@then('{attr1:w} * identity_matrix = {attr2:w}')
 def step_impl(context,attr1,attr2):
 	attr1 = getattr(context,attr1)
 	attr2 = getattr(context,attr2)
 	assert attr1 * attr1.identity() == attr2
 
-@then('identity_matrix * {attr1} = {attr2}')
+@then('identity_matrix * {attr1:w} = {attr2:w}')
 def step_impl(context,attr1,attr2):
 	attr1 = getattr(context,attr1)
 	attr2 = getattr(context,attr2)

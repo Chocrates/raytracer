@@ -16,7 +16,8 @@ class Matrix:
 							if not math.isclose(self.data[i][j],other.data[i][j],rel_tol=1e-10):
 								return False
 					else:
-						ret = True 
+						return False		
+				ret = True 
 
 			return ret
 		else:
