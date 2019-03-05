@@ -52,7 +52,15 @@ def step_impl(context,attr1,attr2):
 def step_impl(context,attr1,attr2):
 	attr1 = getattr(context,attr1)
 	attr2 = getattr(context,attr2)
-	print(attr1)
-	print(attr2)
-	print(Matrix.identity().data)
 	assert Matrix.identity() * attr1 == attr2
+
+@then('transpose({attr:w}) is the following matrix')
+def step_impl(context,attr):
+	a = getattr(context,attr)
+	mat = Matrix.build_matrix(context.text)
+	assert a.transpose() == mat
+
+
+@given('{attr:w} transpose(identity_matrix)')
+def step_impl(context):
+	setattr(context,attr,Matrix.identity().transpose())
