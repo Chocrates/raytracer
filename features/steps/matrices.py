@@ -70,3 +70,7 @@ def step_impl(context,attr):
 def step_impl(context,attr):
 	setattr(context,attr,Matrix.identity().transpose())
 
+@then('determinant({attr:w}) = {num:g}')
+def step_impl(context,attr,num):
+	a = getattr(context,attr)
+	assert a.determinant() == num

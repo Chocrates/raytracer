@@ -49,6 +49,12 @@ class Matrix:
 				transposed[j][i] = self.data[i][j]
 		return Matrix(transposed)
 
+	def determinant(self):
+		if len(self.data) > 2:
+			raise NotImplementedError(f'Only 2x2 matrices are supported')
+		else:
+			return self.data[0][0] * self.data[1][1] - \
+				self.data[0][1] * self.data[1][0]
 
 	@classmethod
 	def build_matrix(cls,text):
