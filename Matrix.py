@@ -25,7 +25,7 @@ class Matrix:
 
 	def __mul__(self,other):
 		if isinstance(other,Matrix):
-			result = [[0 for _ in range(len(other.data[0]))] for __ in range(len(self.data))]
+			result = [[0 for _ in range(len(other.data[0]))] for _ in range(len(self.data))]
 			for i in range(len(self.data)):
 				for j in range(len(other.data[0])):
 					tmp = 0
@@ -41,6 +41,14 @@ class Matrix:
 			return Tuple(result_mat.data[0][0],result_mat.data[1][0],result_mat.data[2][0],result_mat.data[3][0])
 		else:
 			raise NotImplementedError(f'Matrix equality is not implemented for types {type(other)}')
+
+	def transpose(self):
+		transposed = [ [ 0 for _ in range(len(self.data[0])) ] for _ in range(len(self.data))]
+		for i in range(len(self.data)):
+			for j in range(len(self.data[i])):
+				transposed[j][i] = self.data[i][j]
+		return Matrix(transposed)
+
 
 	@classmethod
 	def build_matrix(cls,text):

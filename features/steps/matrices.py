@@ -16,6 +16,11 @@ def step_impl(context,attr,x,y,num):
 	m = getattr(context,attr)
 	assert math.isclose(m.data[x][y],num,rel_tol=1e-10)
 
+@then('{attr} = identity_matrix')
+def step_impl(context,attr):
+	a = getattr(context,attr)
+	assert a == Matrix.identity()
+
 @then('{attr1:w} = {attr2:w}')
 def step_impl(context,attr1,attr2):
 	a = getattr(context,attr1)
@@ -62,5 +67,6 @@ def step_impl(context,attr):
 
 
 @given('{attr:w} transpose(identity_matrix)')
-def step_impl(context):
+def step_impl(context,attr):
 	setattr(context,attr,Matrix.identity().transpose())
+
