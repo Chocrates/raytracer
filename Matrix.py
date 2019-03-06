@@ -1,5 +1,6 @@
 import re
 import math
+import copy
 from Tuple import *
 
 class Matrix:
@@ -12,8 +13,8 @@ class Matrix:
 			if len(self.data) == len(other.data):
 				for i in range(len(self.data)):
 					if len(self.data[i]) == len(other.data[i]):
-						for j in range(len(self.data[i])):
-							if not math.isclose(self.data[i][j],other.data[i][j],rel_tol=1e-10):
+						for j in range(len(self.data[i])): 
+							if not math.isclose(round(self.data[i][j],4),round(other.data[i][j],4),rel_tol=1e-4):
 								return False
 					else:
 						return False		
@@ -21,14 +22,13 @@ class Matrix:
 
 			return ret
 		else:
-			raise NotImplementedError(f'Matrix equality is not implemented for types {type(other)}')
-
+			raise NotImplementedError(f'Matrix equality is not implemented for types {type(other)}') 
 	def __mul__(self,other):
 		if isinstance(other,Matrix):
 			result = [[0 for _ in range(len(other.data[0]))] for _ in range(len(self.data))]
 			for i in range(len(self.data)):
 				for j in range(len(other.data[0])):
-					tmp = 0
+					tmp = 0 
 					for k in range(len(self.data)):
 						tmp += self.data[i][k] * other.data[k][j]
 					result[i][j] = tmp
@@ -51,10 +51,48 @@ class Matrix:
 
 	def determinant(self):
 		if len(self.data) > 2:
-			raise NotImplementedError(f'Only 2x2 matrices are supported')
+			det = 0
+			for i in range(len(self.data[0])): 
+				det += self.data[0][i] * self.cofactor(0,i)
+			return det
 		else:
 			return self.data[0][0] * self.data[1][1] - \
 				self.data[0][1] * self.data[1][0]
+	
+	def submatrix(self, row, col):
+		sub = copy.deepcopy(self.data)
+		for r in sub:
+			del r[col]
+		del sub[row]
+		return Matrix(sub)
+
+	def minor(self,row,col):
+		return self.submatrix(row,col).determinant()
+	
+	def cofactor(self,row,col):
+		m = self.minor(row,col)
+		if (row+col)%2 != 0:
+			m *= -1
+
+		return m
+	
+	@property
+	def invertible(self):
+		return self.determinant() != 0
+	
+	def inverse(self):
+		if not self.invertible:
+			raise TypeError('Matrix is not invertible')
+		else:
+			m2 = [[0 for x in range(len(self.data))] for y in range(len(self.data))]
+			for row in range(len(self.data)):
+				for col in range(len(self.data[0])):
+					if col == 2 and row == 2:
+						#import pdb; pdb.set_trace()
+						pass
+					cof = self.cofactor(row,col)
+					m2[col][row] = cof/self.determinant()
+			return Matrix(m2)
 
 	@classmethod
 	def build_matrix(cls,text):
