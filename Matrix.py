@@ -14,7 +14,7 @@ class Matrix:
 				for i in range(len(self.data)):
 					if len(self.data[i]) == len(other.data[i]):
 						for j in range(len(self.data[i])): 
-							if not math.isclose(round(self.data[i][j],4),round(other.data[i][j],4),rel_tol=1e-4):
+							if not math.isclose(self.data[i][j],other.data[i][j],rel_tol=1e-4):
 								return False
 					else:
 						return False		
