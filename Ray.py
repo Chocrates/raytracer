@@ -1,4 +1,5 @@
 import math
+from Intersection import *
 class Ray:
 	def __init__(self,origin,direction):
 		self.origin = origin
@@ -21,5 +22,5 @@ class Ray:
 		t1 = (-b - math.sqrt(discriminant))/(2*a)
 		t2 = (-b + math.sqrt(discriminant))/(2*a)
 
-		return (t1,t2)
+		return (Intersection(t1,other),Intersection(t2,other))
 

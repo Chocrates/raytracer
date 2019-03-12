@@ -3,7 +3,7 @@ Feature: Intersection data structure tests
 		Given s sphere()
 		When i intersection(3.5,s)
 		Then i.t = 3.5
-			And i.object = s
+			And i.shape = s
 
 	Scenario: Aggregating intersections
 		Given s sphere()
