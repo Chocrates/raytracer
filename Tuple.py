@@ -7,7 +7,7 @@ class Tuple:
 		self.w = w
 	
 	def __eq__(self, other):
-		return all(map(lambda x: math.isclose(x[0],x[1],rel_tol=x[2]), [l + [1e-10] for l in [[self.x,other.x],[self.y,other.y],[self.z,other.z],[self.w,other.w]]]))
+		return all(map(lambda x: math.fabs(x[0] - x[1] < x[2]), [l + [1e-4] for l in [[self.x,other.x],[self.y,other.y],[self.z,other.z],[self.w,other.w]]]))
 	
 	def __add__(self, other):
 		return Tuple(self.x + other.x,
