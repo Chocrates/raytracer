@@ -21,3 +21,22 @@ def step_impl(context,attr,px,py,pz,vx,vy,vz):
 def step_impl(context,ray,t,x,y,z):
 	r = getattr(context,ray)
 	assert r.position(t) == Point(x,y,z)
+
+@when('{attr1:w} transform({attr2:w},{attr3:w})')
+def step_impl(context,attr1,attr2,attr3):
+	a = getattr(context,attr2)
+	b = getattr(context,attr3)
+	setattr(context,attr1,a.transform(b))
+
+
+@then('{attr:w}.{prop:w} = point({x:g},{y:g},{z:g})')
+def step_impl(context,attr,prop,x,y,z):
+	a = getattr(context,attr)
+	b = getattr(a,prop)
+	assert b == Point(x,y,z)
+
+@then('{attr:w}.{prop:w} = vector({x:g},{y:g},{z:g})')
+def step_impl(context,attr,prop,x,y,z):
+	a = getattr(context,attr)
+	b = getattr(a,prop)
+	assert b == Vector(x,y,z)

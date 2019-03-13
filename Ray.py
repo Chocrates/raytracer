@@ -1,5 +1,7 @@
 import math
 from Intersection import *
+import copy
+
 class Ray:
 	def __init__(self,origin,direction):
 		self.origin = origin
@@ -23,4 +25,7 @@ class Ray:
 		t2 = (-b + math.sqrt(discriminant))/(2*a)
 
 		return (Intersection(t1,other),Intersection(t2,other))
+
+	def transform(self,matrix):
+		return Ray(matrix * copy.deepcopy(self.origin), matrix * copy.deepcopy(self.direction))
 
