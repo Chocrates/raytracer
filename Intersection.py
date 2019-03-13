@@ -19,3 +19,9 @@ class Intersections:
 
 	def __next__(self):
 		return next(self.data)
+
+	def hit(self):
+		try:
+			return min([ item for item in self.data if item.t > 0 ], key=lambda x: x.t)
+		except ValueError:
+			return None
