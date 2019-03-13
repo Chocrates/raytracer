@@ -5,10 +5,17 @@ import math
 def step_impl(context,attr,x,y,z,w):
 	setattr(context, attr, Tuple(x,y,z,w))
 
-@then('{attr}.{dimension:d} = {x:g}')
+@then('{attr}.{dimension:w} = {x:g}')
 def step_impl(context,attr,dimension,x):
 	t = getattr(context,attr)
 	assert getattr(t,dimension) == x
+
+@then('{attr1:w}.{prop:w} = {attr2:w}')
+def step_impl(context,attr1,prop,attr2):
+	a = getattr(context,attr1)
+	b = getattr(context,attr2)
+	p = getattr(a,prop)
+	assert p == b
 
 @then('{attr} = tuple({x:g},{y:g},{z:g},{w:g}')
 def step_impl(context,attr,x,y,z,w):

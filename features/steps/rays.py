@@ -13,13 +13,6 @@ def step_impl(context,attr,num):
     a = getattr(context,attr)
     assert len(a) == num
 
-@then('{attr1:w}.{prop:w} = {attr2:w}')
-def step_impl(context,attr1,prop,attr2):
-	a = getattr(context,attr1)
-	b = getattr(context,attr2)
-	p = getattr(a,prop)
-	assert p == b
-
 @given('{attr:w} ray(point({px:g},{py:g},{pz:g}),vector({vx:g},{vy:g},{vz:g}))')
 def step_impl(context,attr,px,py,pz,vx,vy,vz):
 	setattr(context,attr,Ray(Point(px,py,pz),Vector(vx,vy,vz)))
