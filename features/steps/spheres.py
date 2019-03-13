@@ -1,4 +1,6 @@
 from Sphere import *
+from Translation import *
+import importlib
 
 @given('{attr:w} sphere()')
 def step_impl(context,attr):
@@ -23,3 +25,16 @@ def step_impl(context,attr1,idx,attr2,val):
     b = getattr(a[idx],attr2)
     c = getattr(context,val)
     assert b == c
+
+@when('set_transform({attr1:w},{attr2:w})')
+def step_impl(context,attr1,attr2):
+	a = getattr(context,attr1)
+	b = getattr(context,attr2)
+	a.transform = b
+
+@when('set_transform({attr:w},{method:w}({x:g},{y:g},{z:g}))')
+def step_impl(context,attr,method,x,y,z):
+	a = getattr(context,attr)
+	# Extra hacky, capitalize the first char for the class name
+	transform = getattr(importlib.import_module('Translation'),method.capitalize())
+	a.transform = transform(x,y,z)

@@ -11,9 +11,10 @@ class Ray:
 		return self.origin + self.direction * time
 
 	def intersects(self,other):
-		sphere_to_ray = self.origin - other.origin
-		a = self.direction.dot(self.direction)
-		b = 2 * self.direction.dot(sphere_to_ray) 
+		transformed_ray = self.transform(other.transform.inverse())
+		sphere_to_ray = transformed_ray.origin - other.origin
+		a = transformed_ray.direction.dot(transformed_ray.direction)
+		b = 2 * transformed_ray.direction.dot(sphere_to_ray) 
 		c = sphere_to_ray.dot(sphere_to_ray) - 1
 
 		discriminant = b * b - 4 * a * c

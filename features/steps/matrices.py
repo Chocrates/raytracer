@@ -21,6 +21,12 @@ def step_impl(context,attr,x,y,numerator,denominator):
 	m = getattr(context,attr)
 	assert math.isclose(m.data[x][y],numerator/denominator,rel_tol=1e-10)
 
+@then('{attr:w}.{prop:w} = identity_matrix')
+def step_impl(context,attr,prop):
+	a = getattr(context,attr)
+	b = getattr(a,prop)
+	assert b == Matrix.identity()
+
 @then('{attr} = identity_matrix')
 def step_impl(context,attr):
 	a = getattr(context,attr)
