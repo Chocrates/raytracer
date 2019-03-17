@@ -71,18 +71,18 @@ class Tuple:
 
 class Point(Tuple):
 	def __init__(self,x,y,z):
-		super(Point,self).__init__(x,y,z,1.0)	
+		super().__init__(x,y,z,1.0)	
 
 class Vector(Tuple):
 	def __init__(self,x,y,z):
-		super(Vector,self).__init__(x,y,z,0.0)
+		super().__init__(x,y,z,0.0)
 	
 	def reflect(self,other):
 		return self - other * 2 * self.dot(other)
 
 class Color(Tuple):
 	def __init__(self,r,g,b):
-		super(Color,self).__init__(r,g,b,0.0)
+		super().__init__(r,g,b,0.0)
 	
 	@property
 	def red(self):

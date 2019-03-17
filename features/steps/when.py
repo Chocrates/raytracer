@@ -9,6 +9,7 @@ from Sphere import *
 import importlib
 from Canvas import *
 import copy
+from Light import *
 
 def parse_math_string(num_string):
 	""" Parses square root, pi, and e in a number into a python representation """
@@ -120,3 +121,9 @@ def step_impl(context,attr1,attr2,prop):
 	a = getattr(context,attr2)
 	b = getattr(a,prop)
 	setattr(context,attr1,b)
+
+@when('{attr1:w} point_light({attr2:w},{attr3:w})')
+def step_impl(context,attr1,attr2,attr3):
+	a = getattr(context,attr2)
+	b = getattr(context,attr3)
+	setattr(context,attr1,PointLight(a,b))
