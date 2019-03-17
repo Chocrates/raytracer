@@ -47,8 +47,8 @@ class Rotation(Matrix):
 			mat = Matrix.identity().data
 			mat[0][0] = math.cos(r)
 			mat[0][1] = -math.sin(r)
-			mat[1][1] = math.sin(r)
-			mat[1][2] = math.cos(r)
+			mat[1][0] = math.sin(r)
+			mat[1][1] = math.cos(r)
 			self.data = mat
 
 class Shearing(Matrix):

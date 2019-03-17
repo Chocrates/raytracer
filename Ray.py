@@ -20,12 +20,12 @@ class Ray:
 		discriminant = b * b - 4 * a * c
 
 		if discriminant < 0:
-			return ()
+			return Intersections()
 
 		t1 = (-b - math.sqrt(discriminant))/(2*a)
 		t2 = (-b + math.sqrt(discriminant))/(2*a)
 
-		return (Intersection(t1,other),Intersection(t2,other))
+		return Intersections(Intersection(t1,other),Intersection(t2,other))
 
 	def transform(self,matrix):
 		return Ray(matrix * copy.deepcopy(self.origin), matrix * copy.deepcopy(self.direction))
