@@ -127,3 +127,12 @@ def step_impl(context,attr1,attr2,attr3):
 	a = getattr(context,attr2)
 	b = getattr(context,attr3)
 	setattr(context,attr1,PointLight(a,b))
+
+@when('{attr1:w} lighting({attr2:w},{attr3:w},{attr4:w},{attr5:w},{attr6:w})')
+def step_impl(context,attr1,attr2,attr3,attr4,attr5,attr6):
+	m = getattr(context,attr2)
+	l = getattr(context,attr3)
+	p = getattr(context,attr4)
+	e = getattr(context,attr5)
+	n = getattr(context,attr6)
+	setattr(context,attr1,m.lighting(l,p,e,n))

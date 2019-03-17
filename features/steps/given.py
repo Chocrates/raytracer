@@ -11,6 +11,7 @@ from Ray import *
 from Sphere import *
 from Canvas import *
 from Material import *
+from Light import *
 
 def parse_math_string(num_string):
 	""" Parses square root, pi, and e in a number into a python representation """
@@ -108,7 +109,7 @@ def step_impl(context,attr,x,y,z,w):
 def step_impl(context,attr,x,y,z):
 	setattr(context,attr,Point(x,y,z))
 
-@given('{attr} vector({xs:S},{ys:S},{zs:S})')
+@given('{attr:w} vector({xs:S},{ys:S},{zs:S})')
 def step_impl(context,attr,xs,ys,zs):
 	x = parse_math_string(xs)
 	y = parse_math_string(ys)
@@ -144,3 +145,7 @@ def step_impl(context,attr1,prop,num):
 @given('{attr:w} material()')
 def step_impl(context,attr):
 	setattr(context,attr, Material())
+
+@given('{attr:w} point_light(point({px:g},{py:g},{pz:g}),color({cx:g},{cy:g},{cz:g}))')
+def step_impl(context,attr,px,py,pz,cx,cy,cz):
+	setattr(context,attr,PointLight(Point(px,py,pz),Color(cx,cy,cz)))

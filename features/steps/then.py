@@ -409,3 +409,10 @@ def step_impl(context,attr):
 @then('{attr:w} = material()')
 def step_impl(context,attr):
 	setattr(context,attr,Material())
+
+@then('{attr:w} = color({x:g},{y:g},{z:g})')
+def step_impl(context,attr,x,y,z):
+	a = getattr(context,attr)
+	print(f'A: {a}')
+	print(f'Color: {Color(x,y,z)}')
+	assert a == Color(x,y,z)
