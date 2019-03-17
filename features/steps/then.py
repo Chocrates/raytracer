@@ -231,6 +231,10 @@ def step_impl(context,canvas, x, y, color):
 	clr = getattr(context,color)
 	assert canvas.pixels[y][x].color == clr
 
+@then('{attr:w}.color = color({x:g},{y:g},{z:g})')
+def step_impl(context,attr,x,y,z):
+	a = getattr(context,attr)
+	assert a.color == Color(x,y,z)
 
 @then('lines {range_begin:d}-{range_end:d} of {attr} are')
 def step_impl(context,range_begin, range_end, attr):
@@ -260,6 +264,9 @@ def step_impl(context,attr1,prop,attr2):
 	a = getattr(context,attr1)
 	b = getattr(context,attr2)
 	p = getattr(a,prop)
+	print(f'A: {a}')
+	print(f'B: {b}')
+	print(f'p: {p}')
 	assert p == b
 
 @then('{attr} = tuple({x:g},{y:g},{z:g},{w:g}')
@@ -398,3 +405,7 @@ def step_impl(context,attr):
 def step_impl(context,attr):
 	a = getattr(context,attr)
 	assert a is None 
+
+@then('{attr:w} = material()')
+def step_impl(context,attr):
+	setattr(context,attr,Material())

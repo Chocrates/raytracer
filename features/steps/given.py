@@ -1,14 +1,16 @@
 from behave import *
-from Matrix import *
+import importlib
+import copy
+import re
 import math
+
+from Matrix import *
 from Tuple import *
 from Translation import *
-import re
 from Ray import *
 from Sphere import *
-import importlib
 from Canvas import *
-import copy
+from Material import *
 
 def parse_math_string(num_string):
 	""" Parses square root, pi, and e in a number into a python representation """
@@ -132,3 +134,13 @@ def step_impl(context,attr1,**kwargs):
 		attributes.append(getattr(context,attr))
 	setattr(context,attr1,Intersections(*attributes))
 
+
+@given('{attr1:w}.{prop:w} {num:g}')
+def step_impl(context,attr1,prop,num):
+	a = getattr(context,attr1)
+	b = getattr(a,prop)
+	b = num
+
+@given('{attr:w} material()')
+def step_impl(context,attr):
+	setattr(context,attr, Material())

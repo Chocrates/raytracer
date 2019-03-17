@@ -108,3 +108,15 @@ def step_impl(context,attr1,attr2,attr3):
 	b = getattr(context,attr3)
 	setattr(context,attr1,a.reflect(b))
 
+@when('{attr1:w}.{prop:w} {attr2:w}')
+def step_impl(context,attr1,prop,attr2):
+	a = getattr(context,attr1)
+	b = getattr(a,prop)
+	c = getattr(context,attr2)
+	b = c
+
+@when('{attr1:w} {attr2:w}.{prop:w}')
+def step_impl(context,attr1,attr2,prop):
+	a = getattr(context,attr2)
+	b = getattr(a,prop)
+	setattr(context,attr1,b)
