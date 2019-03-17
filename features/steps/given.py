@@ -106,8 +106,11 @@ def step_impl(context,attr,x,y,z,w):
 def step_impl(context,attr,x,y,z):
 	setattr(context,attr,Point(x,y,z))
 
-@given('{attr} vector({x:g},{y:g},{z:g})')
-def step_impl(context,attr,x,y,z):
+@given('{attr} vector({xs:S},{ys:S},{zs:S})')
+def step_impl(context,attr,xs,ys,zs):
+	x = parse_math_string(xs)
+	y = parse_math_string(ys)
+	z = parse_math_string(zs)
 	setattr(context,attr,Vector(x,y,z))
 
 @given('{attr} color({r:g},{g:g},{b:g})')

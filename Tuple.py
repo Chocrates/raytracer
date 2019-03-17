@@ -76,6 +76,9 @@ class Point(Tuple):
 class Vector(Tuple):
 	def __init__(self,x,y,z):
 		super(Vector,self).__init__(x,y,z,0.0)
+	
+	def reflect(self,other):
+		return self - other * 2 * self.dot(other)
 
 class Color(Tuple):
 	def __init__(self,r,g,b):

@@ -101,3 +101,10 @@ def step_impl(context,attr1,attr2):
 def step_impl(context,attr1,attr2):
 	a = getattr(context,attr2)
 	setattr(context,attr1,a.hit())
+
+@when('{attr1:w} reflect({attr2:w},{attr3:w})')
+def step_impl(context,attr1,attr2,attr3):
+	a = getattr(context,attr2)
+	b = getattr(context,attr3)
+	setattr(context,attr1,a.reflect(b))
+
