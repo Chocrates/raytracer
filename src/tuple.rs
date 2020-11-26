@@ -1,8 +1,8 @@
 use float_cmp::*;
 use std::error::Error;
 use std::fmt;
-use std::ops::{Add, Neg, Sub};
-pub const EPSILON: f64 = 0.0001;
+use std::ops::{Add, Div, Mul, Neg, Sub};
+pub const EPSILON: f64 = 0.000001;
 
 #[derive(Debug)]
 pub struct Tuple {
@@ -46,6 +46,32 @@ impl Tuple {
 
     pub fn is_vector(&self) -> bool {
         approx_eq!(f64, self.w, 0.0, epsilon = EPSILON)
+    }
+
+    pub fn magnitude(&self) -> f64 {
+        (self.x.powf(2.0) + self.y.powf(2.0) + self.z.powf(2.0) + self.w.powf(2.0)).sqrt()
+    }
+
+    pub fn normalize(&self) -> Self {
+        let mag = self.magnitude();
+        Self {
+            x: self.x / mag,
+            y: self.y / mag,
+            z: self.z / mag,
+            w: self.w / mag,
+        }
+    }
+
+    pub fn dot(&self, other: Self) -> f64 {
+        self.x * other.x + self.y * other.y + self.z * other.z + self.w * other.w
+    }
+
+    pub fn cross(&self, other: Self) -> Self {
+        Tuple::vector(
+            self.y * other.z - self.z * other.y,
+            self.z * other.x - self.x * other.z,
+            self.x * other.y - self.y * other.x,
+        )
     }
 }
 
@@ -104,6 +130,31 @@ impl Neg for Tuple {
             y: -self.y,
             z: -self.z,
             w: -self.w,
+        }
+    }
+}
+
+impl Mul<f64> for Tuple {
+    type Output = Self;
+    fn mul(self, other: f64) -> Self {
+        Self {
+            x: self.x * other,
+            y: self.y * other,
+            z: self.z * other,
+            w: self.w * other,
+        }
+    }
+}
+
+impl Div<f64> for Tuple {
+    type Output = Self;
+
+    fn div(self, other: f64) -> Self {
+        Self {
+            x: self.x / other,
+            y: self.y / other,
+            z: self.z / other,
+            w: self.w / other,
         }
     }
 }

@@ -2,7 +2,7 @@
 This project is a ray tracer written in rust, using the _[The Ray Tracer Challenge](https://pragprog.com/titles/jbtracer/the-ray-tracer-challenge/)_
 
 ## Chapters
-1. [ ] Tuples, Points, and Vectors
+1. [x] Tuples, Points, and Vectors
 1. [ ] Drawing on a Canvas
 1. [ ] Matrices
 1. [ ] Matrix Transformations
