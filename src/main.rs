@@ -1,13 +1,10 @@
-mod other;
+extern crate raytracer;
+use raytracer::*;
 
-pub mod prelude {
-    pub use crate::other::*;
-}
+use regex::Regex;
 
-use prelude::*;
-
-fn main() {
+pub fn main() {
     println!("test");
-    let test_var = Hello::new();
-    println!("{}", test_var.run());
+
+    println!("{}", (-tuple::Tuple::vector(1.0, 2.0, 3.0)));
 }

@@ -1,13 +1,12 @@
-use raytracer::prelude::*;
-
 mod steps;
 use async_trait::async_trait;
+use raytracer::*;
+use std::collections::HashMap;
 
 use std::convert::Infallible;
 
 pub struct MainTestWorld {
-    hello: Hello,
-    results: String,
+    tuples: HashMap<String, tuple::Tuple>,
 }
 
 #[async_trait(?Send)]
@@ -17,8 +16,7 @@ impl cucumber::World for MainTestWorld {
     // Much more straightforward than the Default Trait before. :)
     async fn new() -> Result<Self, Infallible> {
         Ok(Self {
-            hello: Hello::new(),
-            results: String::new(),
+            tuples: HashMap::new(),
         })
     }
 }
