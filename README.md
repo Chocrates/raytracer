@@ -21,3 +21,7 @@ This project is a ray tracer written in rust, using the _[The Ray Tracer Challen
 1. [ ] Next Steps
     - Not sure how I'm going to handle this yet
 1. [ ] Rendering the Cover Image
+
+## Where are the cucumber tests?
+My lack of knowledge of rust made getting cucumber up and running a huge pain.
+Working set of Cucumber tests with the first two specs are located in the [cucumber](https://github.com/Chocrates/raytracer/tree/cucumber) tag.
