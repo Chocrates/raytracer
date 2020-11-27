@@ -18,16 +18,16 @@ pub fn main() {
 
     println!(
         "{}",
-        tuple::Tuple::vector(1.0, 2.0, 3.0).dot(tuple::Tuple::vector(2.0, 3.0, 4.0))
+        tuple::Tuple::vector(1.0, 2.0, 3.0).dot(&tuple::Tuple::vector(2.0, 3.0, 4.0))
     );
 
     println!(
         "{}",
-        tuple::Tuple::vector(1.0, 2.0, 3.0).cross(tuple::Tuple::vector(2.0, 3.0, 4.0))
+        tuple::Tuple::vector(1.0, 2.0, 3.0).cross(&tuple::Tuple::vector(2.0, 3.0, 4.0))
     );
 
     println!(
         "{}",
-        tuple::Tuple::vector(2.0, 3.0, 4.0).cross(tuple::Tuple::vector(1.0, 2.0, 3.0))
+        tuple::Tuple::vector(2.0, 3.0, 4.0).cross(&tuple::Tuple::vector(1.0, 2.0, 3.0))
     );
 }

@@ -62,11 +62,11 @@ impl Tuple {
         }
     }
 
-    pub fn dot(&self, other: Self) -> f64 {
+    pub fn dot(&self, other: &Self) -> f64 {
         self.x * other.x + self.y * other.y + self.z * other.z + self.w * other.w
     }
 
-    pub fn cross(&self, other: Self) -> Self {
+    pub fn cross(&self, other: &Self) -> Self {
         Tuple::vector(
             self.y * other.z - self.z * other.y,
             self.z * other.x - self.x * other.z,
@@ -85,9 +85,9 @@ impl fmt::Display for Tuple {
     }
 }
 impl Add for Tuple {
-    type Output = Result<Self, TupleError>;
+    type Output = Self;
 
-    fn add(self, other: Self) -> Result<Self, TupleError> {
+    fn add(self, other: Self) -> Self {
         let out = Self {
             x: self.x + other.x,
             y: self.y + other.y,
@@ -96,17 +96,17 @@ impl Add for Tuple {
         };
 
         if out.w > 1.0 {
-            Err(TupleError {})
+            panic!("Point + Point addition is not valid");
         } else {
-            Ok(out)
+            out
         }
     }
 }
 
 impl Sub for Tuple {
-    type Output = Result<Self, TupleError>;
+    type Output = Self;
 
-    fn sub(self, other: Self) -> Result<Self, TupleError> {
+    fn sub(self, other: Self) -> Self {
         let out = Self {
             x: self.x - other.x,
             y: self.y - other.y,
@@ -115,9 +115,9 @@ impl Sub for Tuple {
         };
 
         if out.w < 0.0 {
-            Err(TupleError {})
+            panic!("Vector - Point subtractin is not valid");
         } else {
-            Ok(out)
+            out
         }
     }
 }
