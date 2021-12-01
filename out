@@ -1,0 +1,40 @@
+[raytracer] tree                        main  ✗ ✭ ✱
+.
+├── CODE_OF_CONDUCT.md
+├── Gemfile
+├── LICENSE.txt
+├── README.md
+├── Rakefile
+├── bin
+│   ├── console
+│   └── setup
+├── exe
+│   └── raytracer
+├── lib
+│   ├── raytracer
+│   │   ├── tuple.rb
+│   │   └── version.rb
+│   └── raytracer.rb
+└── raytracer.gemspec
+
+4 directories, 12 files
+[raytracer] cat lib/raytracer.rb                                                             main  ✗ ✭ ✱
+# frozen_string_literal: true
+
+require_relative 'raytracer'
+
+module Raytracer
+class Error < StandardError; end
+end
+[raytracer] cat lib/raytracer/tuple.rb                                                       main  ✗ ✭ ✱
+module Raytracer
+class Tuple
+    attr_reader :x, :y, :z, :w
+                 def initialize(x, y, z, w)
+                 @x = x
+                 @y = y
+                 @z = z
+                 @w = w
+                 end
+                 end
+

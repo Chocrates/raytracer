@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/raytracer'
+
+projectile = Struct.new :projectile do
+  attr_accessor :position, :velocity
+
+  def initialize(position, velocity)
+    @position = position
+    @velocity = velocity
+  end
+end
+
+environment = Struct.new :environment do
+  attr_accessor :gravity, :wind
+
+  def initialize(gravity, wind)
+    @gravity = gravity
+    @wind = wind
+  end
+end
+
+def tick(projectile, environment)
+  projectile.position += projectile.velocity
+  projectile.velocity += environment.gravity + environment.wind
+  projectile
+end
+
+p = projectile.new Raytracer::Point.new(0, 1, 0), Raytracer::Vector.new(1, 1, 0).normalize
+
+e = environment.new Raytracer::Vector.new(0, -0.1, 0), Raytracer::Vector.new(-0.01, 0, 0)
+
+until p.position.y <= 0
+  p = tick(p, e)
+  puts p.position.to_s
+end
