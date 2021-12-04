@@ -171,50 +171,43 @@ Then('cross\(b, a) = vector\({int}, {int}, {int})') do |_int, _int2, _int3|
 end
 
 Given('c ← color\({float}, {float}, {float})') do |_float, _float2, _float3|
-  pending # Write code here that turns the phrase above into concrete actions
+  @c = Raytracer::Color.new(_float, _float2, _float3)
 end
 
 Then('c.red = {float}') do |_float|
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(@c.red).to eq(_float)
 end
 
 Then('c.green = {float}') do |_float|
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(@c.green).to eq(_float)
 end
 
 Then('c.blue = {float}') do |_float|
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(@c.blue).to eq(_float)
 end
 
 Given('c1 ← color\({float}, {float}, {float})') do |_float, _float2, _float3|
-  pending # Write code here that turns the phrase above into concrete actions
+  @c1 = Raytracer::Color.new(_float, _float2, _float3)
 end
 
 Given('c2 ← color\({float}, {float}, {float})') do |_float, _float2, _float3|
-  pending # Write code here that turns the phrase above into concrete actions
+  @c2 = Raytracer::Color.new(_float, _float2, _float3)
 end
 
-Then('c1 {float} c2 = color\({float}, {float}, {float})') do |_float, _float2, _float3, _float4|
-  pending # Write code here that turns the phrase above into concrete actions
+Then('c1 + c2 = color\({float}, {float}, {float})') do |_float, _float2, _float3|
+  expect(@c1 + @c2).to eq(Raytracer::Color.new(_float, _float2, _float3))
 end
 
-Then('c * {int} = color\({float}, {float}, {float})') do |_int, _float, _float2, _float3|
-  # Then('c * {float} = color\({float}, {float}, {float})') do |float, float2, float3, float4|
-  pending # Write code here that turns the phrase above into concrete actions
+Then('c1 - c2 = color\({float}, {float}, {float})') do |_float, _float2, _float3|
+  expect(@c1 - @c2).to eq(Raytracer::Color.new(_float, _float2, _float3))
 end
 
-Given('c1 ← color\({int}, {float}, {float})') do |_int, _float, _float2|
-  # Given('c1 ← color\({float}, {float}, {float})') do |float, float2, float3|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given('c2 ← color\({float}, {int}, {float})') do |_float, _int, _float2|
-  # Given('c2 ← color\({float}, {float}, {float})') do |float, float2, float3|
-  pending # Write code here that turns the phrase above into concrete actions
+Then('c * {float} = color\({float}, {float}, {float})') do |_float, _float2, _float3, _float4|
+  expect(@c * _float).to eq(Raytracer::Color.new(_float2, _float3, _float4))
 end
 
 Then('c1 * c2 = color\({float}, {float}, {float})') do |_float, _float2, _float3|
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(@c1 * @c2).to eq(Raytracer::Color.new(_float, _float2, _float3))
 end
 
 Given('n ← vector\({int}, {int}, {int})') do |_int, _int2, _int3|

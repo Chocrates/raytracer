@@ -33,9 +33,7 @@ module Raytracer
     end
 
     def *(other)
-      puts "Other is #{other.class}"
-      puts "Other #{other}"
-      if other.instance_of?(Tuple)
+      if other.is_a?(Tuple)
         Tuple.new(@x * other.x, @y * other.y, @z * other.z, @w * other.w)
       elsif other.is_a? Numeric
         Tuple.new(@x * other, @y * other, @z * other, @w * other)
@@ -97,6 +95,43 @@ module Raytracer
   class Vector < Tuple
     def initialize(x, y, z)
       super(x, y, z, 0.0)
+    end
+  end
+
+  class Color < Tuple
+    def initialize(r, g, b)
+      super(r, g, b, 0.0)
+    end
+
+    def red
+      @x
+    end
+
+    def red=(r)
+      @x = r
+    end
+
+    def green
+      @y
+    end
+
+    def green=(g)
+      @y = g
+    end
+
+    def blue
+      @z
+    end
+
+    def blue=(b)
+      @z = b
+    end
+    protected def clamp(v)
+      [0.0, [v * 255, 255.0].min].max.round.to_i
+    end
+
+    def to_s
+      "#{clamp @x} #{clamp @y} #{clamp @z}"
     end
   end
 end

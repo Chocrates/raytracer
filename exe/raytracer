@@ -26,11 +26,16 @@ def tick(projectile, environment)
   projectile
 end
 
-p = projectile.new Raytracer::Point.new(0, 1, 0), Raytracer::Vector.new(1, 1, 0).normalize
+width = 900
+height = 550
+c = Raytracer::Canvas.new(width, height, Raytracer::Color.new(0, 0, 0))
+
+p = projectile.new Raytracer::Point.new(0, 1, 0), Raytracer::Vector.new(1, 1.8, 0).normalize * 11.25
 
 e = environment.new Raytracer::Vector.new(0, -0.1, 0), Raytracer::Vector.new(-0.01, 0, 0)
 
 until p.position.y <= 0
+  c.write_pixel p.position.x.round, height - p.position.y.round, Raytracer::Color.new(1, 0, 0)
   p = tick(p, e)
-  puts p.position.to_s
 end
+File.open('projectile.ppm', 'w') { |file| file.write(c.to_ppm) }
